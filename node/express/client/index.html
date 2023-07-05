@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <script type="text/javascript"> 
+              fetch("http://localhost:3000/api/v2/healthCheck?userId=1").then(async (resp) => {
+                  let jsonResponse = await resp.json();
+                  document.getElementById("root").innerHTML = JSON.stringify(jsonResponse);
+              }).catch((error) => {
+                  document.getElementById("root").innerHTML = error;
+              });
+
+        </script>
+    </head>
+    <body>
+       <div id="root"></div>
+    </body>
+</html>
