@@ -1,7 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
+import https from "https";
 import { config } from "./config";
 import routes from "./routes";
+import fs from "fs";
 
 const app = express();
 
@@ -13,6 +15,15 @@ mongoose.connect(config.mongoUri)
 // Routes
 app.use("/", routes);
 
-app.listen(config.port, () => {
-  console.log(`🚀 [${config.env}] Server running at http://localhost:${config.port}`);
+const options = {
+  key: fs.readFileSync("../cert/localhost-key.pem"),
+  cert: fs.readFileSync("../cert/localhost-cert.pem"),
+};
+
+https.createServer(options, app).listen(3001, () => {
+  console.log(`🚀 HTTPS server running at https://localhost:${config.httpsPort}`);
 });
+
+// app.listen(config.port, () => {
+//   console.log(`🚀 [${config.env}] Server running at http://localhost:${config.port}`);
+// });
