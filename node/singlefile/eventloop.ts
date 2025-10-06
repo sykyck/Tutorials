@@ -1,25 +1,68 @@
 // eventloop.ts
+console.log("🟢 [1] Start of script");
 
-console.log("🟢 Start of script");
-
-// process.nextTick → microtask (runs before Promises)
+// ====================
+// process.nextTick (Microtask)
+// ====================
 process.nextTick(() => {
-  console.log("🟡 process.nextTick callback");
+  console.log("🟡 [2] process.nextTick (first level)");
+
+  process.nextTick(() => {
+    console.log("🟡 [3] Nested process.nextTick inside process.nextTick");
+  });
+
+  Promise.resolve().then(() => {
+    console.log("🔵 [4] Promise inside process.nextTick");
+  });
 });
 
-// Promise → microtask (runs after nextTick)
+// ====================
+// Promise (Microtask)
+// ====================
 Promise.resolve().then(() => {
-  console.log("🔵 Promise.then callback");
+  console.log("🔵 [5] Promise.then (first level)");
+
+  process.nextTick(() => {
+    console.log("🟡 [6] process.nextTick inside Promise.then");
+  });
+
+  Promise.resolve().then(() => {
+    console.log("🔵 [7] Nested Promise.then inside Promise.then");
+  });
 });
 
-// setTimeout → macrotask (timer phase)
+// ====================
+// setTimeout (Macrotask - Timers Phase)
+// ====================
 setTimeout(() => {
-  console.log("⏰ setTimeout callback");
+  console.log("⏰ [8] setTimeout callback (timer phase)");
+
+  process.nextTick(() => {
+    console.log("🟡 [9] process.nextTick inside setTimeout");
+  });
+
+  Promise.resolve().then(() => {
+    console.log("🔵 [10] Promise.then inside setTimeout");
+  });
+
+  setTimeout(() => {
+    console.log("⏰ [11] Nested setTimeout inside setTimeout");
+  }, 0);
 }, 0);
 
-// setImmediate → macrotask (check phase, runs after timers)
+// ====================
+// setImmediate (Macrotask - Check Phase)
+// ====================
 setImmediate(() => {
-  console.log("🚀 setImmediate callback");
+  console.log("🚀 [12] setImmediate callback (check phase)");
+
+  process.nextTick(() => {
+    console.log("🟡 [13] process.nextTick inside setImmediate");
+  });
+
+  Promise.resolve().then(() => {
+    console.log("🔵 [14] Promise.then inside setImmediate");
+  });
 });
 
-console.log("🔴 End of script");
+console.log("🔴 [15] End of script");
