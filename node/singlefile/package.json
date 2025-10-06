@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "runbinarysearch":"ts-node binarysearch.ts"
+    "runbinarysearch":"ts-node binarysearch.ts",
+    "runfibonacci":"ts-node fibonacci.ts"
   },
   "keywords": [],
   "author": "",
