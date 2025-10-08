@@ -12,8 +12,10 @@ mongoose.connect(config.mongoUri)
   .then(() => console.log(`✅ Connected to MongoDB at ${config.mongoUri}`))
   .catch(err => console.error("❌ MongoDB connection error:", err));
 
+
+app.use(express.json()); // <--- This is crucial req.body will be undefined unless you enable express.json() middleware
 // Routes
-app.use("/", routes);
+app.use("/api", routes);
 
 const options = {
   key: fs.readFileSync("../cert/localhost-key.pem"),

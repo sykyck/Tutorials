@@ -22,7 +22,15 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    /* Path alias */
+    "baseUrl": "src",
+    "paths": {
+      "@common/*": ["common/*"],
+      "@redux/*": ["redux/*"],
+      "@assets/*": ["assets/*"],
+      "@api/*": ["api/*"],
+    },
   },
   "include": ["src"]
 }
