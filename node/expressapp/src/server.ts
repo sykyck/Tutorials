@@ -4,6 +4,7 @@ import https from "https";
 import { config } from "./config";
 import routes from "./routes";
 import fs from "fs";
+import cors from "cors";
 
 const app = express();
 
@@ -12,7 +13,7 @@ mongoose.connect(config.mongoUri)
   .then(() => console.log(`✅ Connected to MongoDB at ${config.mongoUri}`))
   .catch(err => console.error("❌ MongoDB connection error:", err));
 
-
+app.use(cors());
 app.use(express.json()); // <--- This is crucial req.body will be undefined unless you enable express.json() middleware
 // Routes
 app.use("/api", routes);
