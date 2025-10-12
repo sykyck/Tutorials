@@ -8,8 +8,8 @@ if (environment.production) {
 if (environment.useStandalone) {
   // 👉 Standalone app bootstrapping
   import('@angular/platform-browser').then(({ bootstrapApplication }) => {
-    import('./app/app.config').then(({ appConfig }) => {
-      import('./app/app.component').then(({ AppComponent }) => {
+    import('./app.config').then(({ appConfig }) => {
+      import('./components/app/app.component').then(({ AppComponent }) => {
         bootstrapApplication(AppComponent, appConfig)
           .catch(err => console.error(err));
       });
@@ -18,7 +18,7 @@ if (environment.useStandalone) {
 } else {
   // 👉 Module-based bootstrapping
   import('@angular/platform-browser-dynamic').then(({ platformBrowserDynamic }) => {
-    import('./app/app.module').then(({ AppModule }) => {
+    import('./app.module').then(({ AppModule }) => {
       platformBrowserDynamic()
         .bootstrapModule(AppModule)
         .catch(err => console.error(err));
