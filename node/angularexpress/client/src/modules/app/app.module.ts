@@ -2,13 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AsyncpipeComponent } from './components/asyncpipe/asyncpipe.component';
-import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from './components/app/app.component';
-
-const routes: Routes = [
-  { path: 'asyncpipe', component: AsyncpipeComponent }
-];
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, AsyncpipeComponent],
@@ -16,7 +13,8 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     CommonModule,
-    RouterModule.forRoot(routes)
+    SharedModule,
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })

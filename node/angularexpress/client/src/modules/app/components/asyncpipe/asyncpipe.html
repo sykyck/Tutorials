@@ -2,7 +2,7 @@
 
 <ul>
   <!-- AsyncPipe subscribes to users$ automatically -->
-  <li *ngFor="let user of users$ | async">
+  <li *ngFor="let user of users$ | async" appHighlight>
     {{ user.name }} — {{ user.email }}
   </li>
 </ul>
