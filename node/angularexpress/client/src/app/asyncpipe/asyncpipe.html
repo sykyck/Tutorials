@@ -1,0 +1,10 @@
+<h1>Users (AsyncPipe Example)</h1>
+
+<ul>
+  <!-- AsyncPipe subscribes to users$ automatically -->
+  <li *ngFor="let user of users$ | async">
+    {{ user.name }} — {{ user.email }}
+  </li>
+</ul>
+
+<p *ngIf="!(users$ | async)">Loading...</p>
