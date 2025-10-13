@@ -7,5 +7,5 @@ export const config = {
   env,
   port: process.env.PORT || 3000,
   httpsPort: process.env.HTTPS_PORT || 3001,
-  mongoUri: process.env.MONGO_URI || "mongodb://localhost:27017/testdevdb",
+  mongoUri: process.env.MONGO_URI || "mongodb://localhost:27017/angularexpressdevdb",
 };

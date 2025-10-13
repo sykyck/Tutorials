@@ -23,10 +23,82 @@ body, html {
   height: 100%;
 }
 
+/* ✅ Top Navbar */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  height: 60px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.app-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.username {
+  font-weight: 500;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+}
+
+/* Dropdown menu */
+.dropdown {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background-color: #fff;
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  min-width: 120px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.dropdown button {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font-weight: 500;
+}
+
+.dropdown button:hover {
+  background-color: #f3f4f6;
+}
+
+/* ✅ Layout Container */
 .app-container {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background: var(--bg-color);
+}
+
+.content-wrapper {
+  display: flex;
+  flex: 1;
 }
 
 /* Sidebar */
@@ -75,9 +147,13 @@ body, html {
   overflow-y: auto;
 }
 
-/* Responsive */
+/* ✅ Responsive */
 @media screen and (max-width: 768px) {
   .app-container {
+    flex-direction: column;
+  }
+
+  .content-wrapper {
     flex-direction: column;
   }
 
@@ -93,5 +169,12 @@ body, html {
   .nav-links {
     flex-direction: row;
     gap: 1rem;
+  }
+
+  .top-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 1rem;
   }
 }

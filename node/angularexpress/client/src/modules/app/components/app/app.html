@@ -1,13 +1,33 @@
-<main class="app-container">
-  <aside class="sidebar">
-    <h2>Navigation</h2>
-    <nav class="nav-links">
-      <a routerLink="/home" routerLinkActive="active">Home</a>
-      <a routerLink="/asyncpipe" routerLinkActive="active">Async Pipe</a>
-    </nav>
-  </aside>
+<main class="app-container" *ngIf="isLoggedIn; else loginLayout">
+  <!-- ✅ Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="app-title">My App</div>
 
-  <section class="main-content">
-    <router-outlet></router-outlet>
-  </section>
+    <div class="user-menu" (click)="toggleMenu()">
+      <span class="username">{{ username }}</span>
+      <img src="assets/user-avatar.png" alt="User Avatar" class="avatar" />
+      <div class="dropdown" *ngIf="menuOpen">
+        <button (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="content-wrapper">
+    <aside class="sidebar">
+      <h2>Navigation</h2>
+      <nav class="nav-links">
+        <a routerLink="/home" routerLinkActive="active">Home</a>
+        <a routerLink="/asyncpipe" routerLinkActive="active">Async Pipe</a>
+      </nav>
+    </aside>
+
+    <section class="main-content">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
 </main>
+
+<!-- Show when user is not logged in -->
+<ng-template #loginLayout>
+  <router-outlet></router-outlet>
+</ng-template>

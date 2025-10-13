@@ -1,11 +1,8 @@
 import { Router } from "express";
-import mongoose from "mongoose";
+import User from '../models/user.model';
+import { getPaginatedUsers } from '../controllers/user.controller';
 
 const router = Router();
-
-// Schema + model
-const UserSchema = new mongoose.Schema({ name: String, age: Number });
-const User = mongoose.model("User", UserSchema);
 
 // ✅ POST /api/add-user  → Add user
 router.post("/add-user", async (req, res) => {
@@ -26,31 +23,6 @@ router.post("/add-user", async (req, res) => {
 });
 
 // ✅ GET /api/users?page=1&limit=10
-router.get("/paginatedUsers", async (req, res) => {
-  try {
-    const page = parseInt(req.query.page as string) || 1;  // default: 1
-    const limit = parseInt(req.query.limit as string) || 10; // default: 10
-    const skip = (page - 1) * limit;
-
-    // total number of documents
-    const totalUsers = await User.countDocuments();
-
-    // actual users for this page
-    const users = await User.find()
-      .skip(skip)
-      .limit(limit)
-      .sort({ _id: -1 }); // optional: newest first
-
-    res.json({
-      totalUsers,
-      totalUserPages: Math.ceil(totalUsers / limit),
-      currentPage: page,
-      users,
-    });
-  } catch (err) {
-    console.error("Error fetching users:", err);
-    res.status(500).json({ error: "Failed to fetch users" });
-  }
-});
+router.get("/paginatedUsers", getPaginatedUsers);
 
 export default router;
