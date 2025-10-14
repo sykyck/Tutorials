@@ -3,28 +3,34 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { jwtDecode } from 'jwt-decode';
+import { BehaviorSubject } from 'rxjs';
+import { AUTH_CONSTANTS } from '../constants/auth.constants';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly TOKEN_KEY = 'auth_token';
+  private loggedIn$ = new BehaviorSubject<boolean>(this.hasToken());
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { email: string; password: string }) {
-    return this.http.post<{ token: string }>(`${environment.apiUrl}/auth/login`, credentials)
-      .pipe(
-        tap(response => {
-          localStorage.setItem(this.TOKEN_KEY, response.token);
-        })
-      );
+   // ✅ Called after successful login
+  onLoginSuccess(token: string, role: string) {
+    localStorage.setItem(AUTH_CONSTANTS.TOKEN_KEY, token);
+    localStorage.setItem(AUTH_CONSTANTS.USER_ROLE_KEY, role);
+    this.loggedIn$.next(true);
   }
 
-  logout() {
-    localStorage.removeItem(this.TOKEN_KEY);
+  // ✅ Called on logout
+  onLogout() {
+    localStorage.removeItem(AUTH_CONSTANTS.TOKEN_KEY);
+    this.loggedIn$.next(false);
+  }
+
+  private hasToken(): boolean {
+    return !!localStorage.getItem(AUTH_CONSTANTS.TOKEN_KEY);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    return localStorage.getItem(AUTH_CONSTANTS.TOKEN_KEY);
   }
 
   isTokenExpired(token: string): boolean {
@@ -36,9 +42,8 @@ export class AuthService {
     }
   }
 
-  isLoggedIn(): boolean {
-    const token = this.getToken();
-    // optionally check expiry
-    return !!token;
+  // ✅ Reactive login state (for layouts)
+  isLoggedIn$() {
+    return this.loggedIn$.asObservable();
   }
 }

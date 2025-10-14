@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
+import { AUTH_CONSTANTS } from '../../../../constants/auth.constants';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ export class LoginComponent {
   username = '';
   password = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private authService:AuthService) {}
 
   login() {
     this.http.post<any>(`${environment.apiUrl}/auth/login`, {
@@ -21,8 +23,7 @@ export class LoginComponent {
       password: this.password
     }).subscribe({
       next: (res) => {
-        localStorage.setItem('auth_token', res.token);
-        localStorage.setItem('role', res.role);
+        this.authService.onLoginSuccess(res.token, res.role);
         this.router.navigate(['/asyncpipe']);
       },
       error: (err) => alert(err.error.message)

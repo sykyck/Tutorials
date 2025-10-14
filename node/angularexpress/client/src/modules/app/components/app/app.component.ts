@@ -18,7 +18,9 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.isLoggedIn = this.authService.isLoggedIn();
+    this.authService.isLoggedIn$().subscribe(isLogged => {
+       this.isLoggedIn = isLogged;
+    });
 
     const token = this.authService.getToken();
     if (token) {
@@ -36,7 +38,7 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.onLogout();
     this.menuOpen = false;
     this.isLoggedIn = false;
     this.router.navigate(['/login']);
