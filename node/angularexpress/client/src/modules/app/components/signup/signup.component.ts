@@ -21,8 +21,8 @@ export class SignupComponent {
       password: this.password,
       role: this.role
     }).subscribe({
-      next: () => alert('Signup successful!'),
-      error: (err) => alert(err.error.message)
+      next: (res:any) => alert(res.message),
+      error: (err:any) => alert(err.message)
     });
   }
 }

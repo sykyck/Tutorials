@@ -21,9 +21,9 @@ export class LoginComponent {
       password: this.password
     }).subscribe({
       next: (res) => {
-        localStorage.setItem('token', res.token);
+        localStorage.setItem('auth_token', res.token);
         localStorage.setItem('role', res.role);
-        this.router.navigate(['/']);
+        this.router.navigate(['/asyncpipe']);
       },
       error: (err) => alert(err.error.message)
     });
