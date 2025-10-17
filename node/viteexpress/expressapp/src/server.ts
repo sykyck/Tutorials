@@ -19,8 +19,8 @@ app.use(express.json()); // <--- This is crucial req.body will be undefined unle
 app.use("/api", routes);
 
 const options = {
-  key: fs.readFileSync("../cert/localhost-key.pem"),
-  cert: fs.readFileSync("../cert/localhost-cert.pem"),
+  key: fs.readFileSync("../../cert/localhost-key.pem"),
+  cert: fs.readFileSync("../../cert/localhost-cert.pem"),
 };
 
 https.createServer(options, app).listen(3001, () => {
