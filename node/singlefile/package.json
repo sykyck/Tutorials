@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "runbinarysearch":"ts-node binarysearch.ts",
     "runfibonacci":"ts-node fibonacci.ts",
-    "runEventloop":"ts-node eventloop.ts"
+    "runEventloop":"ts-node eventloop.ts",
+    "runGenerator":"ts-node generator.ts"
   },
   "keywords": [],
   "author": "",
