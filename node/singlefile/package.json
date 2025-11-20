@@ -7,7 +7,8 @@
     "runbinarysearch":"ts-node binarysearch.ts",
     "runfibonacci":"ts-node fibonacci.ts",
     "runEventloop":"ts-node eventloop.ts",
-    "runGenerator":"ts-node generator.ts"
+    "runGenerator":"ts-node generator.ts",
+    "runObjectBasics":"ts-node objectBasics.ts"
   },
   "keywords": [],
   "author": "",
