@@ -5,6 +5,7 @@ import { LoginComponent } from './modules/app/components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MainLayoutComponent } from './modules/shared/components/layouts/main/main-layout.component';
 import { PublicLayoutComponent } from './modules/shared/components/layouts/public/public-layout.component';
+import { ObservablesComponent } from './modules/app/components/observables/observables.component';
 
 
 export const routes: Routes = [
@@ -23,6 +24,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'asyncpipe', component: AsyncpipeComponent },
+      { path: 'observables', component: ObservablesComponent }
     ]
   },
   {

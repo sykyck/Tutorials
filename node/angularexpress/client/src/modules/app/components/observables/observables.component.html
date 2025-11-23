@@ -1,0 +1,16 @@
+<h2>Higher Order Observables Demo</h2>
+
+<!-- SWITCHMAP: Live Search -->
+<input [formControl]="searchCtrl" placeholder="Search user..." />
+
+<p *ngIf="searchResult">Search Result: {{ searchResult | json }}</p>
+
+<button #loadBtn>Load Parallel Data (mergeMap)</button>
+<p *ngIf="parallelData.length">Parallel results: {{ parallelData | json }}</p>
+
+<button #saveBtn>Save (concatMap queue)</button>
+<p>Save Log:</p>
+<div *ngFor="let msg of saveLog">{{ msg }}</div>
+
+<button #loginBtn>Login (exhaustMap)</button>
+<p>{{ loginStatus }}</p>
