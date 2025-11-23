@@ -1,1 +1,2 @@
-declare module 'mfe1/Module';
+declare module 'basket/Module';
+declare module 'products/Module';

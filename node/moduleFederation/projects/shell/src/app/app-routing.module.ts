@@ -3,19 +3,22 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'mfe1',
-    loadChildren: () =>
-      import('mfe1/Module').then(m => m.AppModule)
-  },
-  {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'mfe1'
-  }
+    redirectTo: 'basket',
+  },
+  {
+    path: 'basket',
+    loadChildren: () => import('basket/Module').then((m) => m.RemoteModule),
+  },
+  {
+    path: 'products',
+    loadChildren: () => import('products/Module').then((m) => m.RemoteModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
