@@ -24,7 +24,7 @@ export class LoginComponent {
     }).subscribe({
       next: (res) => {
         this.authService.onLoginSuccess(res.token, res.role);
-        this.router.navigate(['/asyncpipe']);
+        this.router.navigate(['/app/asyncpipe']);
       },
       error: (err) => alert(err.error.message)
     });
