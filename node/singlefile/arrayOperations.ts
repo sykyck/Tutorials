@@ -17,3 +17,10 @@ let someFruits = fruits.slice(1, 3);
 fruits.splice(1, 1, 'mango', 'grape'); // Remove 1 item at index 1, add 'mango' and 'grape'
 console.log(someFruits); // Output: ['banana', 'cherry']
 console.log(fruits); // Output: ['apple', 'mango', 'grape', 'cherry']
+console.log(rotateArray([1,2,3,4,5],2)); // Output: [4,5,1,2,3]
+
+function rotateArray(arr:number[],k:number):number[]{
+    let newArr = arr.slice(0, arr.length - k);
+    let rotatedArr = arr.slice(-k).concat(newArr);
+    return rotatedArr;
+}
