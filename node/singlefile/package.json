@@ -8,7 +8,9 @@
     "runfibonacci":"ts-node fibonacci.ts",
     "runEventloop":"ts-node eventloop.ts",
     "runGenerator":"ts-node generator.ts",
-    "runObjectBasics":"ts-node objectBasics.ts"
+    "runObjectBasics":"ts-node objectBasics.ts",
+    "runMapOperations":"ts-node mapOperations.ts",
+    "runStringOperations":"ts-node stringOperations.ts"
   },
   "keywords": [],
   "author": "",
