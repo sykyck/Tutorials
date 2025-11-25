@@ -10,7 +10,8 @@
     "runGenerator":"ts-node generator.ts",
     "runObjectBasics":"ts-node objectBasics.ts",
     "runMapOperations":"ts-node mapOperations.ts",
-    "runStringOperations":"ts-node stringOperations.ts"
+    "runStringOperations":"ts-node stringOperations.ts",
+    "runArrayOperations":"ts-node arrayOperations.ts"
   },
   "keywords": [],
   "author": "",
