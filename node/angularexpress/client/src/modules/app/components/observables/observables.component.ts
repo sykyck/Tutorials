@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { fromEvent, interval } from 'rxjs';
@@ -15,6 +15,9 @@ export class ObservablesComponent {
   parallelData: any[] = [];
   saveLog: string[] = [];
   loginStatus = '';
+  @ViewChild('loginBtn', { static: true }) loginBtn!: ElementRef;
+  @ViewChild('saveBtn', { static: true }) saveBtn!: ElementRef;
+  @ViewChild('loadBtn', { static: true }) loadBtn!: ElementRef;
 
   constructor(private http: HttpClient) {}
 
@@ -43,9 +46,7 @@ export class ObservablesComponent {
   // 2️⃣ MERGEMAP — Parallel HTTP calls (No cancellation)
   // -------------------------------------------------------
   setupMergeMapParallelLoad() {
-    const btn = document.querySelector('button:nth-of-type(1)')!;
-
-    fromEvent(btn, 'click').pipe(
+    fromEvent(this.loadBtn.nativeElement, 'click').pipe(
       mergeMap(() => this.http.get('https://jsonplaceholder.typicode.com/posts/1')),
       mergeMap((post:any) => this.http.get(`https://jsonplaceholder.typicode.com/users/${post['userId']}`)),
     )
@@ -58,9 +59,7 @@ export class ObservablesComponent {
   // 3️⃣ CONCATMAP — Sequential Save Queue
   // -------------------------------------------------------
   setupConcatMapSaveQueue() {
-    const btn = document.querySelector('button:nth-of-type(2)')!;
-
-    fromEvent(btn, 'click').pipe(
+    fromEvent(this.saveBtn.nativeElement, 'click').pipe(
       concatMap(() =>
         this.http.post('https://jsonplaceholder.typicode.com/posts', {
           time: new Date().toISOString()
@@ -75,15 +74,18 @@ export class ObservablesComponent {
   // 4️⃣ EXHAUSTMAP — Prevent Double Login Click
   // -------------------------------------------------------
   setupExhaustMapLogin() {
-    const btn = document.querySelector('button:nth-of-type(3)')!;
-
-    fromEvent(btn, 'click').pipe(
-      exhaustMap(() => {
-        this.loginStatus = 'Logging in...';
-        return this.http.get('https://jsonplaceholder.typicode.com/users/1');
-      })
-    ).subscribe((result:any) => {
-      this.loginStatus = `Logged in: ${result['name']}`;
-    });
+    fromEvent(this.loginBtn.nativeElement, 'click')
+      .pipe(
+        tap(() => console.log('Login button clicked')),
+        exhaustMap(() => {
+          this.loginStatus = 'Logging in...';
+          return this.http.get('https://jsonplaceholder.typicode.com/users/1');
+        })
+      )
+      .subscribe((result: any) => {
+        this.loginStatus = `Logged in: ${result.name}`;
+        console.log('Login complete:', result);
+      });
   }
+
 }

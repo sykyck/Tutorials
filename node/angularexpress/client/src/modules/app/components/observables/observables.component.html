@@ -1,16 +1,46 @@
 <h2>Higher Order Observables Demo</h2>
 
-<!-- SWITCHMAP: Live Search -->
-<input [formControl]="searchCtrl" placeholder="Search user..." />
+<!-- SECTION 1: SWITCHMAP -->
+<section>
+  <h3>1️⃣ Live Search (switchMap)</h3>
 
-<p *ngIf="searchResult">Search Result: {{ searchResult | json }}</p>
+  <input [formControl]="searchCtrl" placeholder="Search user..." />
 
-<button #loadBtn>Load Parallel Data (mergeMap)</button>
-<p *ngIf="parallelData.length">Parallel results: {{ parallelData | json }}</p>
+  <div *ngIf="searchResult" class="output">
+    {{ searchResult | json }}
+  </div>
+</section>
 
-<button #saveBtn>Save (concatMap queue)</button>
-<p>Save Log:</p>
-<div *ngFor="let msg of saveLog">{{ msg }}</div>
+<!-- SECTION 2: MERGEMAP -->
+<section>
+  <h3>2️⃣ Parallel HTTP Calls (mergeMap)</h3>
 
-<button #loginBtn>Login (exhaustMap)</button>
-<p>{{ loginStatus }}</p>
+  <button #loadBtn>Load Parallel Data</button>
+
+  <div *ngIf="parallelData.length" class="output">
+    {{ parallelData | json }}
+  </div>
+</section>
+
+<!-- SECTION 3: CONCATMAP -->
+<section>
+  <h3>3️⃣ Save Queue (concatMap)</h3>
+
+  <button #saveBtn>Save</button>
+
+  <p>Save Log:</p>
+  <div class="save-log">
+    <div *ngFor="let msg of saveLog">{{ msg }}</div>
+  </div>
+</section>
+
+<!-- SECTION 4: EXHAUSTMAP -->
+<section>
+  <h3>4️⃣ Login (exhaustMap)</h3>
+
+  <button #loginBtn>Login</button>
+
+  <div class="output">
+    {{ loginStatus }}
+  </div>
+</section>

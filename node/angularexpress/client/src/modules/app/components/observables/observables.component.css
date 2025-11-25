@@ -1,0 +1,95 @@
+:host {
+  display: block;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+}
+
+/* Headline */
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* Section wrapper */
+section {
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background: #fafafa;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Section titles */
+section h3 {
+  margin-top: 0;
+  color: #444;
+  font-size: 18px;
+}
+
+/* Input field */
+input[formControl] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+/* Buttons */
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: all 0.2s;
+}
+
+/* Button colors */
+button:nth-of-type(1) { background: #4caf50; color: white; }  /* Parallel Load */
+button:nth-of-type(2) { background: #2196f3; color: white; }  /* Save Queue */
+button:nth-of-type(3) { background: #f57c00; color: white; }  /* Login */
+
+/* Hover effect */
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Output box */
+.output {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  font-family: monospace;
+  color: #333;
+}
+
+/* Save log list */
+.save-log {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 6px;
+  margin-top: 10px;
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+.save-log div {
+  padding: 4px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.save-log div:last-child {
+  border-bottom: none;
+}
